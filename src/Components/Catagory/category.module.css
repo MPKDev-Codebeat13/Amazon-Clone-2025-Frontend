@@ -30,10 +30,14 @@
 }
 
 .category_container {
-    position: relative;
-    margin-top: -19%;
-    justify-content: space-between;
-    display: grid;
-    grid-template-columns: repeat(4,1fr);
-    place-items: center;
+  position: relative;
+  margin-top: -19%;
+  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 50px;
+  max-width: 1600px;
+  margin-right: auto;
+  margin-left: auto;
+  place-items: center;
 }

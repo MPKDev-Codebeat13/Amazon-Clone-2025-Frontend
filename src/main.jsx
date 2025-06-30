@@ -1,11 +1,14 @@
-import { createRoot } from 'react-dom/client';
-import App from './App.jsx';
-import { DataProvider } from './Components/DataProvider/DataProvider.jsx';
-import { initialState,reducer } from './Utility/reducer.jsx';
-import './index.css';
-import React from 'react'
-createRoot(document.getElementById('root')).render(
-  <DataProvider reducer={reducer} initialState={initialState}>
-    <App />
-  </DataProvider>
+import React from 'react';
+import ReactDOM from 'react-dom/client'; // ✅ updated import
+import App from './App';
+import { DataProvider } from './Components/DataProvider/DataProvider';
+import './index.css'; // Import your global styles
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <DataProvider>
+      <App />
+    </DataProvider>
+  </React.StrictMode>
 );

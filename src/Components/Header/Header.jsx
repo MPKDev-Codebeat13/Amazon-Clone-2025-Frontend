@@ -1,18 +1,18 @@
+import React, { useContext } from 'react';
 import { BiCart } from 'react-icons/bi';
 import { BsSearch } from 'react-icons/bs';
 import { SlLocationPin } from 'react-icons/sl';
+import { Link } from 'react-router-dom';
+import { DataContext } from '../DataProvider/DataProvider';
 import Classes from './Header.module.css';
 import LowerHeader from './LowerHeader';
-import { Link } from 'react-router-dom';
-import { useContext } from 'react';
-import { DataContext } from '../DataProvider/DataProvider';
-
+import { auth } from '../../Utility/firebase';
 function Header() {
-    const [{basket},dispatch]=useContext(DataContext)
-    const totalItem = basket?.reduce((amount,item)=>{
-        return item.amount + amount
-    },0)
-    console.log(basket.length)
+  const { user, basket } = useContext(DataContext);
+  const totalItem = basket?.reduce((amount, item) => {
+    return item.amount + amount;
+  }, 0);
+  console.log(basket.length);
   return (
     <section className={Classes.fixed}>
       <section>
@@ -59,9 +59,20 @@ function Header() {
             </Link>
 
             {/* Three Components */}
-            <Link to=''>
-              <p>Sign in</p>
-              <span>Account & lists</span>
+            <Link to={!user && '/auth'}>
+              <div>
+                {user ? (
+                    <>
+                  <p>Hello {user?.email?.split('@')[0]}</p>
+                  <span onClick={()=>auth.signOut()}>Sign Out</span>
+                  </>
+                ) : (
+                    <>
+                  <p>Hello ,Sign in</p>
+                  <span>Account & lists</span>
+                  </>
+                )}
+              </div>
             </Link>
             {/* Orders */}
             <Link to='/orders'>
